@@ -1,0 +1,11 @@
+{
+  "name": "musify-app",
+  "version": "1.0.0",
+  "description": "Proyecto aplicacion de musica con arquitectura MEAN",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Enoc Baeza",
+  "license": "ISC"
+}
