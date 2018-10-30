@@ -2,6 +2,7 @@
 
 var User = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
+var jwt = require('../services/jwt');
 
 function prueba(req, res){
     res.status(200).send({
@@ -63,7 +64,7 @@ function login(req, res){
                         if(check){
                             if(params.gethash){
                                 //Devuelve token jwt
-    
+                                res.status(200).send({message:'Usuario logueado correctamente', token: jwt.createToken(user)});
                             } else{
                                 //Devuelve usuario logeuado
                                 res.status(200).send({message:'Usuario logueado correctamente', user});
