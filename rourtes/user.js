@@ -2,9 +2,9 @@
 
 var express = require('express');
 var UserController = require('../controllers/user');
+var middlewareAuth = require('../middlewares/authenticated');
 //Maneja la utilizacioon de archivos (files)
 var multipart = require('connect-multiparty');
-var middlewareAuth = require('../middlewares/authenticated');
 //Utilizado para guardar la imagen en el servidor (carpeta /uploads/users)
 var middlewareUpload = multipart({uploadDir: './uploads/users'});
 
