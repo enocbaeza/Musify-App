@@ -12,10 +12,10 @@ var api = express.Router();
 
 
 api.get('/test', middlewareAuth.ensureAuth, UserController.prueba);
-api.post('/register', UserController.saveUser);
+api.post('/user/register', UserController.saveUser);
 api.post('/login', UserController.login);
-api.put('/update-user/:id', middlewareAuth.ensureAuth, UserController.updateUser);
-api.post('/upload-image/:id', [middlewareAuth.ensureAuth, middlewareUpload], UserController.uploadImage);
-api.get('/get-image/:imageFile', UserController.getImageFile);
+api.put('/user/update/:id', middlewareAuth.ensureAuth, UserController.updateUser);
+api.post('/user/upload-image/:id', [middlewareAuth.ensureAuth, middlewareUpload], UserController.uploadImage);
+api.get('/user/get-image/:imageFile', UserController.getImageFile);
  
 module.exports = api;
