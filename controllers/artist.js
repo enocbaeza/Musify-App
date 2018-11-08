@@ -36,7 +36,7 @@ function saveArtist(req, res){
         if(err){
             res.status(500).send({message: 'Error al guardar artista'});
         } else{
-            res.status(200).send({message: 'Artista guardado', artist: artistStored});            
+            res.status(200).send({message: 'Artista guardado', artistStored});            
         }
     });
 }
@@ -56,7 +56,7 @@ function getArtists(req, res){
             } else{
                 res.status(200).send({
                     itemsTotal: total,
-                    artists: artists
+                    artists
                 });
             }            
         }
@@ -73,7 +73,7 @@ function updateArtist(req, res){
         } else{
             res.status(200).send({
                 message:'Artista actualizado correctamente', 
-                artist: artistUpdated
+                artistUpdated
             });
         }
     }); 
@@ -96,7 +96,7 @@ function deleteArtist(req, res){
                         } else{
                             res.status(200).send({
                                 message:'Artista eliminado correctamente', 
-                                artistRemoved: artistRemoved
+                                artistRemoved
                             });
                         }
                     });
@@ -124,7 +124,10 @@ function uploadImage(req, res){
                 if(err){
                     res.status(500).send({message:'Error al actualizar artista'});
                 } else{
-                    res.status(200).send({message:'Artista actualizado correctamente', artist: artistUpdated});
+                    res.status(200).send({
+                        message:'Artista actualizado correctamente', 
+                        artistUpdated
+                    });
                 }
             });
         } else{

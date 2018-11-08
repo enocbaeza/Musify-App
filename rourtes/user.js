@@ -8,14 +8,13 @@ var multipart = require('connect-multiparty');
 //Utilizado para guardar la imagen en el servidor (carpeta /uploads/users)
 var middlewareUpload = multipart({uploadDir: './uploads/users'});
 
-var api = express.Router();
+var expressRouter = express.Router();
 
-
-api.get('/test', middlewareAuth.ensureAuth, UserController.prueba);
-api.post('/user/register', UserController.saveUser);
-api.post('/login', UserController.login);
-api.put('/user/update/:id', middlewareAuth.ensureAuth, UserController.updateUser);
-api.post('/user/upload-image/:id', [middlewareAuth.ensureAuth, middlewareUpload], UserController.uploadImage);
-api.get('/user/get-image/:imageFile', UserController.getImageFile);
+expressRouter.get('/test', middlewareAuth.ensureAuth, UserController.prueba);
+expressRouter.post('/user/register', UserController.saveUser);
+expressRouter.post('/login', UserController.login);
+expressRouter.put('/user/update/:id', middlewareAuth.ensureAuth, UserController.updateUser);
+expressRouter.post('/user/upload-image/:id', [middlewareAuth.ensureAuth, middlewareUpload], UserController.uploadImage);
+expressRouter.get('/user/get-image/:imageFile', UserController.getImageFile);
  
-module.exports = api;
+module.exports = expressRouter;
