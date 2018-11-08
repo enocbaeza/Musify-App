@@ -11,7 +11,7 @@ var middlewareUpload = multipart({uploadDir: './uploads/album'});
 var expressRouter = express.Router();
 
 expressRouter.get('/album/:id', middlewareAuth.ensureAuth, AlbumController.getAlbum);
-expressRouter.get('/albums/:page?', middlewareAuth.ensureAuth, AlbumController.getAlbums);
+expressRouter.get('/albums/:artist?', middlewareAuth.ensureAuth, AlbumController.getAlbums);
 expressRouter.post('/album/save', middlewareAuth.ensureAuth, AlbumController.saveAlbum);
 expressRouter.put('/album/update/:id', middlewareAuth.ensureAuth, AlbumController.updateAlbum);
 expressRouter.delete('/album/delete/:id', middlewareAuth.ensureAuth, AlbumController.deleteAlbum);

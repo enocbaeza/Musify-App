@@ -10,8 +10,8 @@ var Song = require('../models/song');
 
 function getAlbum(req, res){
     var albumId = req.params.id;
-
-    Album.findById(albumId, (err, album) => {
+    //Metodo populate va a buscar los datos del artista y los carga en objeto
+    Album.findById(albumId).populate({path: 'artist'}).exec((err, album) => {
         if(err){
             res.status(500).send({message: 'Error en la peticion'});
         } else{
@@ -25,22 +25,22 @@ function getAlbum(req, res){
 } 
 
 function getAlbums(req, res){
-    var page;
-    (req.params.page) ? page = req.params.page : page = 1;
+    var artistId = req.params.artist;
 
-    var itemsPerPage = 3;    
+    if(!artistId){
+        var find = Album.find({}).sort('title');
+    } else{
+        var find = Album.find({artist: artistId}).sort('year');
+    }
 
-    Album.find().sort('id').paginate(page, itemsPerPage, (err, albums, total) => {
+    find.populate({path: 'artist'}).exec((err, albums) => {
         if(err){
             res.status(500).send({message: 'Error en la peticion'});
         } else{
             if(!albums){
                 res.status(404).send({message: 'No hay albums'});
             } else{
-                res.status(200).send({
-                    itemsTotal: total,
-                    albums
-                });
+                res.status(200).send({albums});
             }            
         }
     });
