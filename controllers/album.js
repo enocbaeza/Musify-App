@@ -76,10 +76,14 @@ function updateAlbum(req, res){
         if(err){
             res.status(500).send({message:'Error al actualizar album'});
         } else{
-            res.status(200).send({
-                message:'Album actualizado correctamente', 
-                album: albumUpdated
-            });
+            if(!albumUpdated){
+                res.status(404).send({message:'Album no encontrado'});
+            } else{
+                res.status(200).send({
+                    message:'Album actualizado correctamente', 
+                    albumUpdated
+                });
+            }
         }
     }); 
 }
@@ -91,16 +95,20 @@ function deleteAlbum(req, res){
         if(err){
             res.status(500).send({message:'Error al eliminar album'});
         } else{
-            Song.find({album: albumRemoved.id}).remove((err, songRemoved) => {
-                if(err){
-                    res.status(500).send({message:'Error al eliminar cancion'});
-                } else{
-                    res.status(200).send({
-                        message:'Album eliminado correctamente', 
-                        albumRemoved
-                    });
-                }
-            });
+            if(!albumRemoved){
+                res.status(404).send({message:'Album no encontrado'});
+            } else{
+                Song.find({album: albumRemoved.id}).remove((err, songRemoved) => {
+                    if(err){
+                        res.status(500).send({message:'Error al eliminar cancion'});
+                    } else{
+                        res.status(200).send({
+                            message:'Album eliminado correctamente', 
+                            albumRemoved
+                        });
+                    }
+                });
+            }
         }
     });
 }
