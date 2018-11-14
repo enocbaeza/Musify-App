@@ -114,7 +114,11 @@ function uploadImage(req, res){
                 if(err){
                     res.status(500).send({message:'Error al actualizar usuario'});
                 } else{
-                    res.status(200).send({message:'Usuario actualizado correctamente', user: userUpdated});
+                    res.status(200).send({
+                        message:'Usuario actualizado correctamente', 
+                        user: userUpdated,
+                        image: fileName
+                    });
                 }
             });
         } else{
