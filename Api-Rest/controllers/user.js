@@ -87,13 +87,28 @@ function updateUser(req, res){
     var userId = req.params.id;
     var update = req.body;
 
-    User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
-        if(err){
-            res.status(500).send({message:'Error al actualizar usuario'});
-        } else{
-            res.status(200).send({message:'Usuario actualizado correctamente', user: userUpdated});
-        }
-    });
+    if(update.password){
+        //encriptar contraseña
+        bcrypt.hash(update.password, null, null, (err,hash) => {
+            update.password = hash;
+            
+            User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+                if(err){
+                    res.status(500).send({message:'Error al actualizar usuario'});
+                } else{
+                    res.status(200).send({message:'Usuario actualizado correctamente', user: userUpdated});
+                }
+            });
+        });
+    } else{
+        User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+            if(err){
+                res.status(500).send({message:'Error al actualizar usuario'});
+            } else{
+                res.status(200).send({message:'Usuario actualizado correctamente', user: userUpdated});
+            }
+        });
+    }
 }
 
 function uploadImage(req, res){
